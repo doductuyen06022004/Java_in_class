@@ -1,155 +1,76 @@
-DROP TABLE IF EXISTS Position;
+SELECT * FROM testing_system.trainee;GenderGenderGenderTraining_Class
+INSERT INTO `testing_system`.`trainee` (`TraineeID`, `Full_Name`, `Birth_Date`, `Gender`, `ET_IQ`, `ET_Gmath`, `ET_English`, `Training_Class`, `Evaluation_Notes`, `VTI_Account`) VALUES ('3', 'tuyen', '2000-05-12', 'male', '4', '6', '7', 'ed_023', '6', 'c');
+INSERT INTO `testing_system`.`trainee` (`TraineeID`, `Full_Name`, `Birth_Date`, `Gender`, `ET_IQ`, `ET_Gmath`, `ET_English`, `Training_Class`, `Evaluation_Notes`, `VTI_Account`) VALUES ('4', 'tuyen', '1999-02-21', 'male', '9', '9', '9', 'ed_21', 'f', 'd');
+INSERT INTO `testing_system`.`trainee` (`TraineeID`, `Full_Name`, `Birth_Date`, `Gender`, `ET_IQ`, `ET_Gmath`, `ET_English`, `Training_Class`, `Evaluation_Notes`, `VTI_Account`) VALUES ('5', 'tuyen', '2001-11-03', 'male', '6', '4', '7', 'ed_21', 's', 'e');
+INSERT INTO `testing_system`.`trainee` (`TraineeID`, `Full_Name`, `Birth_Date`, `Gender`, `ET_IQ`, `ET_Gmath`, `ET_English`, `Training_Class`, `Evaluation_Notes`, `VTI_Account`) VALUES ('6', 'tuyen', '1997-10-22', 'male', '9', '5', '4', 'ed_21', 'a', 'f');
+INSERT INTO `testing_system`.`trainee` (`TraineeID`, `Full_Name`, `Birth_Date`, `Gender`, `ET_IQ`, `ET_Gmath`, `ET_English`, `Training_Class`, `Evaluation_Notes`, `VTI_Account`) VALUES ('7', 'tuyen', '1997-10-22', 'male', '9', '9', '9', 'ed_21', 'v', 'g');
+INSERT INTO `testing_system`.`trainee` (`TraineeID`, `Full_Name`, `Birth_Date`, `Gender`, `ET_IQ`, `ET_Gmath`, `ET_English`, `Training_Class`, `Evaluation_Notes`, `VTI_Account`) VALUES ('8', 'tuyen', '1998-07-05', 'male', '9', '9', '9', 'ed_21', 'x', 'h');
+INSERT INTO `testing_system`.`trainee` (`TraineeID`, `Full_Name`, `Birth_Date`, `Gender`, `ET_IQ`, `ET_Gmath`, `ET_English`, `Training_Class`, `Evaluation_Notes`, `VTI_Account`) VALUES ('9', 'tuyen', '2001-03-15', 'male', '9', '9', '9', 'ed_21', 's', 'y');
+INSERT INTO `testing_system`.`trainee` (`TraineeID`, `Full_Name`, `Birth_Date`, `Gender`, `ET_IQ`, `ET_Gmath`, `ET_English`, `Training_Class`, `Evaluation_Notes`, `VTI_Account`) VALUES ('10', 'tuyen', '1997-06-08', 'male', '9', '9', '9', 'ed_21', 'f', 'k');
+UPDATE `testing_system`.`trainee` SET `VTI_Account` = 'b' WHERE (`TraineeID` = '2');
+SELECT * FROM Department;
 
-DROP TABLE IF EXISTS Trainee;
-CREATE TABLE `Group`(
-    GroupID INT AUTO_INCREMENT PRIMARY KEY,
-    GroupName VARCHAR(35),
-    CreatorID INT,
-    CreateDate DATE
-);
-CREATE TABLE Position (
-    PositionID INT AUTO_INCREMENT PRIMARY KEY,
-    PositionName VARCHAR(30)
-);
+SELECT DepartmentID FROM department
+WHERE  DepartmentName = 'Sale';
 
-CREATE TABLE Account(
-    Email VARCHAR(50),
-    Username VARCHAR(50),
-    FullName VARCHAR(50),
-    DepartmentID INT,
-    PositionID INT,
-    CreateDate DATE,
-    PRIMARY KEY (Email),
-    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID),
-    FOREIGN KEY (PositionID) REFERENCES Position (PositionID) 
-);
+SELECT * FROM Account
+ORDER BY LENGTH(fullname) DESC
+LIMIT 1;
 
-CREATE TABLE `Group`(
-    GroupID INT AUTO_INCREMENT PRIMARY KEY,
-    GroupName VARCHAR(35),
-    CreatorID VARCHAR(50),
-    CreateDate DATE,
-    FOREIGN KEY (CreatorID) REFERENCES Account(Email)
-);
+SELECT g.GroupName
+FROM `Group` g
+JOIN GroupAccount ga ON g.GroupID = ga.groupID
+WHERE ga.GroupID < '2019-12-20';
+DESCRIBE GroupAccount;
 
-CREATE TABLE GroupAccount (
-    GroupID INT,
-    AccountID VARCHAR(50),
-    JoinDate DATE,
-    FOREIGN KEY (GroupID) REFERENCES `Group`(GroupID),
-    FOREIGN KEY (AccountID) REFERENCES Account(Email)
-);
+SELECT *
+FROM Account
+WHERE DepartmentID = 3
+ORDER BY LENGTH(FullName) DESC
+LIMIT 1;
 
-CREATE TABLE TypeQuestion (
-    TypeID INT AUTO_INCREMENT PRIMARY KEY,
-    TypeName VARCHAR(53)
-);
+SELECT DISTINCT g.GroupName
+FROM `Group` g
+JOIN GroupAccount ga ON g.GroupID = ga.GroupID
+WHERE ga.JoinDate < '2019-12-20';
 
-CREATE TABLE Question (
-    QuestionID INT AUTO_INCREMENT PRIMARY KEY,
-    Content VARCHAR(100),
-    CategoryID INT,
-    TypeID INT,
-    CreatorID VARCHAR(50),
-    CreateDate DATE,
-    FOREIGN KEY (TypeID) REFERENCES TypeQuestion(TypeID),
-    FOREIGN KEY (CreatorID) REFERENCES Account(Email)
-);
+SELECT QuestionID
+FROM Answer
+GROUP BY QuestionID
+HAVING COUNT(AnswerID) >= 4;
 
-CREATE TABLE Answer (
-    AnswerID INT AUTO_INCREMENT PRIMARY KEY,
-    Content VARCHAR(50),
-    QuestionID INT,
-    isCorrect ENUM ('dung','sai'),
-    FOREIGN KEY (QuestionID) REFERENCES Question(QuestionID)
-);
+SELECT ExamID
+FROM Exam
+WHERE Duration >= 60
+  AND CreateDate < '2019-12-20';
+  
+  SELECT *
+FROM `Group`
+ORDER BY CreateDate DESC
+LIMIT 5;
 
-CREATE TABLE Exam (
-    ExamID INT AUTO_INCREMENT PRIMARY KEY,
-    Code VARCHAR(20),
-    Title VARCHAR(50),
-    CategoryID INT,
-    Duration INT,
-    CreatorID VARCHAR(50),
-    CreateDate DATE,
-    FOREIGN KEY (CreatorID) REFERENCES Account(Email)
-);
+SELECT COUNT(*) AS NumEmployees
+FROM Account
+WHERE DepartmentID = 2;
 
-CREATE TABLE ExamQuestion (
-    ExamID INT,
-    QuestionID INT,
-    FOREIGN KEY (ExamID) REFERENCES Exam(ExamID),
-    FOREIGN KEY (QuestionID) REFERENCES Question(QuestionID)
-);
+SELECT *
+FROM Account
+WHERE FullName LIKE 'D%o';
 
-CREATE TABLE Trainee (
-    TraineeID INT AUTO_INCREMENT PRIMARY KEY,
-    Full_Name VARCHAR(100) NOT NULL,
-    Birth_Date DATE NOT NULL,
-    Gender ENUM('male', 'female', 'unknown') NOT NULL DEFAULT 'unknown',
-    ET_IQ INT NOT NULL CHECK (ET_IQ BETWEEN 0 AND 20),
-    ET_Gmath INT NOT NULL CHECK (ET_Gmath BETWEEN 0 AND 20),
-    ET_English INT NOT NULL CHECK (ET_English BETWEEN 0 AND 50),
-    Training_Class VARCHAR(20),
-    Evaluation_Notes TEXT,
-    VTI_Account VARCHAR(50) UNIQUE
-);
-DROP DATABASE testing_system;
-CREATE DATABASE testing_system;
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM Exam
+WHERE CreateDate < '2019-12-20';
+SET SQL_SAFE_UPDATES = 1;
 
-INSERT INTO Position (PositionName)
-VALUES 
-('Dev'),
-('Test'),
-('PM'),
-('PM');
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM Question
+WHERE content LIKE 'câu hỏi%';
+SET SQL_SAFE_UPDATES = 1;
 
-INSERT INTO Department (DepartmentName)
-VALUES 
-('Sale'),
-('Marketing'),
-('IT'),
-('HR');
-INSERT INTO Account (Email, Username, FullName, DepartmentID, PositionID, CreateDate)
-VALUES
-('a5@gmail.com', 'user1', 'Do Duc Tuyen', 3, 1, '2024-05-05'),
-('a6@gmail.com', 'user2', 'Do Duc Tuyen', 3, 2, '2024-05-10'),
-('a7@gmail.com', 'user3', 'Do Duc Tuyen', 1, 3, '2024-05-12'),
-('a8@gmail.com', 'user4', 'Do Duc Tuyen', 2, 1, '2024-05-20');
-INSERT INTO `Group` (GroupName, CreatorID, CreateDate)
-VALUES
-('Group Java', 'a1@gmail.com', '2024-05-20'),
-('Group SQL', 'a2@gmail.com', '2024-05-21'),
-('Group Python', 'a3@gmail.com', '2024-05-22');
-INSERT INTO GroupAccount (GroupID, AccountID, JoinDate)
-VALUES
-(1, 'a1@gmail.com', '2024-05-21'),
-(1, 'a2@gmail.com', '2024-05-22'),
-(2, 'a3@gmail.com', '2024-05-25'),
-(3, 'a4@gmail.com', '2024-05-27');
-INSERT INTO TypeQuestion (TypeName)
-VALUES 
-('Essay'),
-('Multiple Choice');
-INSERT INTO Question (Content, CategoryID, TypeID, CreatorID, CreateDate)
-VALUES
-('Câu hỏi Java cơ bản?', 1, 2, 'a1@gmail.com', '2024-06-01'),
-('Câu hỏi SQL cơ bản?', 1, 1, 'a2@gmail.com', '2024-06-02'),
-('Câu hỏi HTML là gì?', 1, 2, 'a3@gmail.com', '2024-06-03');
-INSERT INTO Answer (Content, QuestionID, isCorrect)
-VALUES
-('Java là OOP', 1, 'dung'),
-('Java không phải OOP', 1, 'sai'),
-('SQL dùng để truy vấn', 2, 'dung'),
-('HTML là ngôn ngữ dựng layout', 3, 'dung');
-INSERT INTO Exam (Code, Title, CategoryID, Duration, CreatorID, CreateDate)
-VALUES
-('EX01', 'Đề Java', 1, 60, 'a1@gmail.com', '2025-06-10'),
-('EX02', 'Đề SQL', 1, 45, 'a2@gmail.com', '2024-06-11');
-INSERT INTO ExamQuestion (ExamID, QuestionID)
-VALUES
-(1, 1),
-(1, 3),
-(2, 2);
-INSERT INTO Department (departmentName)
-VALUES ('IT');
+UPDATE Account
+SET FullName = 'Nguyễn Bá Lộc',
+    Email = 'loc.nguyenba@vti.com.vn'
+WHERE PositionID  = 5;
+
+SELECT * FROM `Group` WHERE GroupID = 1;
+
