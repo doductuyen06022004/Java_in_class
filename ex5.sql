@@ -37,7 +37,7 @@ CREATE OR REPLACE VIEW vw_question_long_content AS
 SELECT 
     QuestionID,
     Content,
-    LENGTH(Content) AS content_length
+      CHAR_LENGTH(Content) AS content_length
 FROM Question
 WHERE LENGTH(Content) > 300;
 
