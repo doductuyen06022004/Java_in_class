@@ -4,11 +4,11 @@ SELECT
     a.AccountID,
     a.FullName,
     a.Email,
-    d.DepartmentName
+    d.Department_Name
 FROM Account a
 JOIN Department d 
     ON a.DepartmentID = d.DepartmentID
-WHERE d.DepartmentName = 'Sale';
+WHERE d.Department_Name = 'Sale';
 #2 Tạo view có chứa thông tin các account tham gia vào nhiều group nhất
 CREATE OR REPLACE VIEW vw_account_most_groups AS
 SELECT 
@@ -17,7 +17,7 @@ SELECT
     a.Email,
     COUNT(ga.GroupID) AS total_groups
 FROM Account a
-JOIN GroupAccount ga
+JOIN groupaccount ga
     ON a.AccountID = ga.AccountID
 GROUP BY a.AccountID, a.FullName, a.Email
 HAVING COUNT(ga.GroupID) = (
@@ -46,12 +46,12 @@ WHERE LENGTH(Content) > 300;
 CREATE OR REPLACE VIEW vw_department_most_employee AS
 SELECT 
     d.DepartmentID,
-    d.DepartmentName,
+    d.Department_Name,
     COUNT(a.AccountID) AS total_employee
-FROM Department d
+FROM department d
 LEFT JOIN Account a
     ON d.DepartmentID = a.DepartmentID
-GROUP BY d.DepartmentID, d.DepartmentName
+GROUP BY d.DepartmentID, d.Department_Name
 HAVING COUNT(a.AccountID) = (
     SELECT MAX(emp_count)
     FROM (
@@ -75,3 +75,17 @@ JOIN Account a
     ON q.CreatorID = a.AccountID
 WHERE a.FullName LIKE 'Nguyễn%';
 
+
+SELECT 
+    TABLE_NAME,
+    COLUMN_NAME,
+    CONSTRAINT_NAME
+FROM information_schema.KEY_COLUMN_USAGE
+WHERE REFERENCED_TABLE_NAME = 'account'
+  AND REFERENCED_COLUMN_NAME = 'Email'
+  AND TABLE_SCHEMA = 'testing_system';
+#drop FOREIGN KEY
+ALTER TABLE exam DROP FOREIGN KEY exam_ibfk_1;
+ALTER TABLE `group` DROP FOREIGN KEY group_ibfk_1;
+ALTER TABLE groupaccount DROP FOREIGN KEY groupaccount_ibfk_2;
+ALTER TABLE question DROP FOREIGN KEY question_ibfk_2;
