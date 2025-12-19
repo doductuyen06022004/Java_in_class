@@ -1,11 +1,12 @@
+package ex1;
+
 import java.time.LocalDate;
 
-public class Exam {
+public class Question {
     int id;
-    String code;
-    String title;
+    String content;
     CategoryQuestion category;
-    int duration;
+    TypeQuestion type;
     Account creator;
     LocalDate createDate;
 }

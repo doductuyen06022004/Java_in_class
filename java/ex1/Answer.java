@@ -1,3 +1,5 @@
+package ex1;
+
 public class Answer {
     int id;
     String content;
