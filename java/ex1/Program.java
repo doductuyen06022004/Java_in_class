@@ -505,6 +505,8 @@ public class Program {
         printAccounts(accounts);
         // Question 3;
         printPositiveNumbersLessThan10();
+        // Question_3_ex_3
+        System.out.println(departments[0].toString());
     }
 
 
@@ -700,6 +702,9 @@ public class Program {
             System.out.println(i);
         }
     }
+
+    // Question_3_ex_3
+
 
 
 }
