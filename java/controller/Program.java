@@ -2,6 +2,7 @@ package controller;
 
 import entities.*;
 import ex1.TypeQuestion;
+import services.PrintlnObject;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,154 +13,13 @@ import java.util.*;
 
 public class Program {
     public static void main(String[] args) {
+        Department account = new Department(1, "tuyen","tuyen");
 
-
-
-        // entities.Position
-        Position position_1 = Position.DEV;
-        Position Position_2 = Position.PM;
-
-
-        Position Position_3 = Position.SCRUM_MASTER;
-
-        // entities.Department
-        Department department_1 = new Department( 1 , "", "sdas");
-        department_1.id = 1;
-        department_1.name = "Sale";
-
-        Department department_2 = new Department( 2, "", "sdas");
-        department_2.id = 2;
-        department_2.name = "tuyen";
-
-        Department department_3 = new Department(3, "", "sdas");
-        department_3.id = 3;
-        department_3.name = "IT";
-
-        // entities.Account
-        Account account_1 = new Account();
-        account_1.id = 1;
-        account_1.email = "a@gmail.com";
-        account_1.username = "user1";
-        account_1.fullName = "Nguyen Van A";
-        account_1.department = department_1;
-        account_1.position = position_1;
-        account_1.createDate = LocalDate.now();
-
-        Account account_2 = new Account();
-        account_2.id = 2;
-        account_2.email = "b@gmail.com";
-        account_2.username = "user2";
-        account_2.fullName = "Tran Thi B";
-        account_2.department = department_2;
-        account_2.position = Position_2;
-        account_2.createDate = LocalDate.now();
-
-
-        Account account_3 = new Account();
-        account_3.id = 3;
-        account_3.email = "c@gmail.com";
-        account_3.username = "user3";
-        account_3.fullName = "Le Van C";
-        account_3.department = department_3;
-        account_3.position = Position_2;
-        account_3.createDate = LocalDate.now();
-
-        // entities.Group
-        Group group = new Group();
-        group.id = 1;
-        group.name = "Java Fresher";
-        group.creator = account_1;
-        group.createDate = LocalDate.now();
-
-        Group group_2 = new Group();
-        group_2.id = 2;
-        group_2.name = "SQL Basic";
-        group_2.creator = account_2;
-        group_2.createDate = LocalDate.now();
-
-        Group group_3 = new Group();
-        group_3.id = 3;
-        group_3.name = "Testing";
-        group_3.creator = account_3;
-        group_3.createDate = LocalDate.now();
-
-        // ex1.TypeQuestion
-        TypeQuestion typeQuestion = new TypeQuestion();
-        typeQuestion.id = 1;
-        typeQuestion.name = "Essay";
-
-        TypeQuestion typeQuestion_2 = new TypeQuestion();
-        typeQuestion_2.id = 2;
-        typeQuestion_2.name = "Multiple Choice";
-
-        TypeQuestion typeQuestion_3 = new TypeQuestion();
-        typeQuestion_3.id = 3;
-        typeQuestion_3.name = "True/False";
-
-        // entities.CategoryQuestion
-        CategoryQuestion categoryQuestion = new CategoryQuestion();
-        categoryQuestion.id = 1;
-        categoryQuestion.name = "Java";
-
-        CategoryQuestion categoryQuestion_2 = new CategoryQuestion();
-        categoryQuestion_2.id = 2;
-        categoryQuestion_2.name = "SQL";
-
-        CategoryQuestion categoryQuestion_3 = new CategoryQuestion();
-        categoryQuestion_3.id = 3;
-        categoryQuestion_3.name = ".NET";
-
-        // entities.Question
-        Question question = new Question();
-        question.id = 1;
-        question.content = "Java là gì?";
-        question.category = categoryQuestion;
-        question.type = typeQuestion;
-        question.creator = account_1;
-        question.createDate = LocalDate.now();
-
-        Question question_2 = new Question();
-        question_2.id = 2;
-        question_2.content = "SQL JOIN dùng để làm gì?";
-        question_2.category = categoryQuestion_2;
-        question_2.type = typeQuestion_2;
-        question_2.creator = account_2;
-        question_2.createDate = LocalDate.now();
-
-        Question question_3 = new Question();
-        question_3.id = 3;
-        question_3.content = "OOP có bao nhiêu tính chất?";
-        question_3.category = categoryQuestion_3;
-        question_3.type = typeQuestion_3;
-        question_3.creator = account_3;
-        question_3.createDate = LocalDate.now();
-
-        // entities.Answer
-        Answer ans1 = new Answer();
-        ans1.id = 1;
-        ans1.content = "Java là ngôn ngữ lập trình";
-        ans1.question = question;
-        ans1.isCorrect = true;
-
-        // entities.Exam
-        Exam exam = new Exam();
-        exam.id = 1;
-        exam.code = "EX001";
-        exam.title = "Java Basic Test";
-        exam.category = categoryQuestion;
-        exam.duration = 60;
-        exam.creator = account_1;
-        exam.createDate = LocalDate.now();
-
-        // entities.ExamQuestion
-        ExamQuestion examQuestion = new ExamQuestion();
-        examQuestion.exam = exam;
-        examQuestion.question = question;
-
+        PrintlnObject.println();
         // (entities.Question 3)
-        System.out.println("entities.Department: " + department_1.name);
+        System.out.println("entities.Department: " + );
         System.out.println("entities.Position: " + Position_3);
-        System.out.println("entities.Account: " + account_1.fullName);
+        System.out.println("entities.Account: " + account.address);
         System.out.println("entities.Group: " + group.name);
         System.out.println("ex1.TypeQuestion: " + typeQuestion.name);
         System.out.println("entities.CategoryQuestion: " + categoryQuestion.name);
