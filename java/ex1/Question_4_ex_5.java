@@ -1,5 +1,7 @@
 package ex1;
 
+import entities.Department;
+
 public class Question_4_ex_5 {
     public static void main(String[] args) {
         Department[] departments = new Department[3];

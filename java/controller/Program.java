@@ -1,4 +1,7 @@
-package ex1;
+package controller;
+
+import entities.*;
+import ex1.TypeQuestion;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,29 +13,29 @@ import java.util.*;
 public class Program {
     public static void main(String[] args) {
 
-        // ex1.Department
-        Department department_1 = new Department();
-        department_1.id = 1;
-        department_1.name = "Sale";
 
-        Department department_2 = new Department();
-        department_2.id = 2;
-        department_2.name = "tuyen";
 
-        Department department_3 = new Department();
-        department_3.id = 3;
-        department_3.name = "IT";
-
-        // ex1.Position
+        // entities.Position
         Position position_1 = Position.DEV;
         Position Position_2 = Position.PM;
 
 
         Position Position_3 = Position.SCRUM_MASTER;
 
+        // entities.Department
+        Department department_1 = new Department( 1 , "", "sdas");
+        department_1.id = 1;
+        department_1.name = "Sale";
 
+        Department department_2 = new Department( 2, "", "sdas");
+        department_2.id = 2;
+        department_2.name = "tuyen";
 
-        // ex1.Account
+        Department department_3 = new Department(3, "", "sdas");
+        department_3.id = 3;
+        department_3.name = "IT";
+
+        // entities.Account
         Account account_1 = new Account();
         account_1.id = 1;
         account_1.email = "a@gmail.com";
@@ -61,7 +64,7 @@ public class Program {
         account_3.position = Position_2;
         account_3.createDate = LocalDate.now();
 
-        // ex1.Group
+        // entities.Group
         Group group = new Group();
         group.id = 1;
         group.name = "Java Fresher";
@@ -93,7 +96,7 @@ public class Program {
         typeQuestion_3.id = 3;
         typeQuestion_3.name = "True/False";
 
-        // ex1.CategoryQuestion
+        // entities.CategoryQuestion
         CategoryQuestion categoryQuestion = new CategoryQuestion();
         categoryQuestion.id = 1;
         categoryQuestion.name = "Java";
@@ -106,7 +109,7 @@ public class Program {
         categoryQuestion_3.id = 3;
         categoryQuestion_3.name = ".NET";
 
-        // ex1.Question
+        // entities.Question
         Question question = new Question();
         question.id = 1;
         question.content = "Java là gì?";
@@ -131,14 +134,14 @@ public class Program {
         question_3.creator = account_3;
         question_3.createDate = LocalDate.now();
 
-        // ex1.Answer
+        // entities.Answer
         Answer ans1 = new Answer();
         ans1.id = 1;
         ans1.content = "Java là ngôn ngữ lập trình";
         ans1.question = question;
         ans1.isCorrect = true;
 
-        // ex1.Exam
+        // entities.Exam
         Exam exam = new Exam();
         exam.id = 1;
         exam.code = "EX001";
@@ -148,22 +151,22 @@ public class Program {
         exam.creator = account_1;
         exam.createDate = LocalDate.now();
 
-        // ex1.ExamQuestion
+        // entities.ExamQuestion
         ExamQuestion examQuestion = new ExamQuestion();
         examQuestion.exam = exam;
         examQuestion.question = question;
 
-        // (ex1.Question 3)
-        System.out.println("ex1.Department: " + department_1.name);
-        System.out.println("ex1.Position: " + Position_3);
-        System.out.println("ex1.Account: " + account_1.fullName);
-        System.out.println("ex1.Group: " + group.name);
+        // (entities.Question 3)
+        System.out.println("entities.Department: " + department_1.name);
+        System.out.println("entities.Position: " + Position_3);
+        System.out.println("entities.Account: " + account_1.fullName);
+        System.out.println("entities.Group: " + group.name);
         System.out.println("ex1.TypeQuestion: " + typeQuestion.name);
-        System.out.println("ex1.CategoryQuestion: " + categoryQuestion.name);
-        System.out.println("ex1.Question: " + question.content);
-        System.out.println("ex1.Answer: " + ans1.content);
-        System.out.println("ex1.Exam: " + exam.title);
-        System.out.println("ex1.Exam ex1.Question: " + examQuestion.question.content);
+        System.out.println("entities.CategoryQuestion: " + categoryQuestion.name);
+        System.out.println("entities.Question: " + question.content);
+        System.out.println("entities.Answer: " + ans1.content);
+        System.out.println("entities.Exam: " + exam.title);
+        System.out.println("entities.Exam entities.Question: " + examQuestion.question.content);
 
      // ex1
         if (account_2.department == null) {
@@ -576,7 +579,7 @@ public class Program {
         return acc;
     }
     public static Department createDepartment(Scanner scanner) {
-        Department dep = new Department();
+        Department dep = new Department(5, "sd","lang thuong");
 
         System.out.print("Nhập ID phòng ban: ");
         dep.id = scanner.nextInt();

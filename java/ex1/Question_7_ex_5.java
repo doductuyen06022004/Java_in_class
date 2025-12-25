@@ -1,5 +1,7 @@
 package ex1;
 
+import entities.Department;
+
 import java.util.Arrays;
 
 public class Question_7_ex_5 {

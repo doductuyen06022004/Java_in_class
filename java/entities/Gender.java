@@ -1,4 +1,4 @@
-package ex1;
+package entities;
 
 public enum Gender {
     MALE, FEMALE, UNKNOWN

@@ -1,7 +1,5 @@
 package ex1;
-
 import java.util.Scanner;
-
 public class Question_2_ex_4 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

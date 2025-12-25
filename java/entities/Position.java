@@ -1,4 +1,4 @@
-package ex1;
+package entities;
 
 public enum Position {
 
@@ -22,4 +22,5 @@ public enum Position {
     public int getId() {
         return id;
     }
+
 }

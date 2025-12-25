@@ -1,5 +1,7 @@
 package ex1;
 
+import entities.Account;
+
 import java.time.LocalDate;
 
 public class Question1 {
