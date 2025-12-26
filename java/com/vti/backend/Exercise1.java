@@ -1,30 +1,30 @@
-package controller;
+package com.vti.backend;
 
-import com.vti.entity.Department;
 import com.vti.entity.Account;
+import com.vti.entity.Department;
 import com.vti.entity.Group;
 import com.vti.entity.Position;
 
 import java.time.LocalDate;
 
-public class Program {
+public class Exercise1 {
 
-    public static void main(String[] args) {
+    // Question 1
+    public static void question1() {
 
-        // ===== Exercise 1: Department =====
         Department dep1 = new Department(1, "IT");
         Department dep2 = new Department(2, "Sale");
 
         System.out.println("Department 1: id = " + dep1.getId() + ", name = " + dep1.getName());
         System.out.println("Department 2: id = " + dep2.getId() + ", name = " + dep2.getName());
-
-        // ===== Exercise 2: Account =====
+    }
+    public static void question2() {
 
         // a) Không có parameters
-        Account account1 = new Account();
+        Account acc1 = new Account();
 
         // b) Có id, email, username, firstname, lastname
-        Account account2 = new Account(
+        Account acc2 = new Account(
                 1,
                 "a@gmail.com",
                 "user1",
@@ -33,7 +33,7 @@ public class Program {
         );
 
         // c) Có position, createDate = now
-        Account account3 = new Account(
+        Account acc3 = new Account(
                 2,
                 "b@gmail.com",
                 "user2",
@@ -43,7 +43,7 @@ public class Program {
         );
 
         // d) Có position và createDate
-        Account account4 = new Account(
+        Account acc4 = new Account(
                 3,
                 "c@gmail.com",
                 "user3",
@@ -52,32 +52,36 @@ public class Program {
                 Position.MANAGER,
                 LocalDate.of(2024, 1, 1)
         );
+    } public static void question3() {
 
-        // ===== Exercise 3: Group =====
-
-        // Creator
-        Account creator = account2;
+        Account creator = new Account(
+                1,
+                "admin@gmail.com",
+                "admin",
+                "Nguyen",
+                "Admin",
+                Position.MANAGER
+        );
 
         // a) Không parameters
         Group group1 = new Group();
 
         // b) Account[]
-        Account[] accounts = { account2, account3 };
+        Account acc1 = new Account(2, "a@gmail.com", "user1", "Tran", "An");
+        Account acc2 = new Account(3, "b@gmail.com", "user2", "Le", "Binh");
 
         Group group2 = new Group(
                 "Java Fresher",
                 creator,
-                accounts,
+                new Account[]{acc1, acc2},
                 LocalDate.now()
         );
 
         // c) usernames[]
-        String[] usernames = { "user4", "user5" };
-
         Group group3 = new Group(
                 "Backend Team",
                 creator,
-                usernames,
+                new String[]{"user3", "user4"},
                 LocalDate.of(2024, 1, 1)
         );
     }
