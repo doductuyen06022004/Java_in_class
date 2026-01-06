@@ -1,17 +1,16 @@
 package com.vti.entity;
 
-public class Student {
+public class Student extends Person {
 
     private int id;
-    private String name;
-    private String hometown;
-    private float score;
 
+    private float score;
+    public String clazz;
+    private float fee;
     // b) Constructor: nhập name, hometown, score = 0
-    public Student(String name, String hometown) {
-        this.name = name;
-        this.hometown = hometown;
-        this.score = 0;
+    public Student(String name, String age) {
+        super(Integer.parseInt(name),age  );
+       this.fee = fee;
     }
 
     // c) Set điểm
@@ -39,7 +38,6 @@ public class Student {
         }
 
         System.out.println("Tên: " + name);
-        System.out.println("Quê quán: " + hometown);
         System.out.println("Điểm học lực: " + score);
         System.out.println("Xếp loại: " + rank);
     }

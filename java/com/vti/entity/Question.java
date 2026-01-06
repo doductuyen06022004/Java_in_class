@@ -1,6 +1,6 @@
 package com.vti.entity;
 
-import ex1.TypeQuestion;
+
 
 import java.time.LocalDate;
 
@@ -8,17 +8,17 @@ public class Question {
     private  int id;
     private  String content;
     private  CategoryQuestion category;
-    private  TypeQuestion type;
+ //   private  TypeQuestion type;
     private  Account creator;
     private  LocalDate createDate;
-    public TypeQuestion getType() {
+  /*  public TypeQuestion getType() {
         return type;
     }
 
     public void setType(TypeQuestion type) {
         this.type = type;
     }
-
+*/
     public int getId() {
         return id;
     }
@@ -61,13 +61,13 @@ public class Question {
 
 
 
-    public Question(CategoryQuestion category, String content, LocalDate createDate, Account creator, int id, TypeQuestion type) {
+    public Question(CategoryQuestion category, String content, LocalDate createDate, Account creator, int id) {
         this.category = category;
         this.content = content;
         this.createDate = createDate;
         this.creator = creator;
         this.id = id;
-        this.type = type;
+     //   this.type = type;
     }
 
 
