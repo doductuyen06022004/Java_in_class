@@ -11,5 +11,6 @@ public class Program1 {
         question2();
         question1();
         question3();
+
     }
 }

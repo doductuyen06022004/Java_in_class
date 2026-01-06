@@ -1,44 +1,44 @@
 package com.vti.entity;
 
+
+
 public class Student extends Person {
 
-    private int id;
-
-    private float score;
-    public String clazz;
-    private float fee;
-    // b) Constructor: nhập name, hometown, score = 0
-    public Student(String name, String age) {
-        super(Integer.parseInt(name),age  );
-       this.fee = fee;
+    public String getStudentId() {
+        return studentId;
     }
 
-    // c) Set điểm
-    public void setScore(float score) {
-        this.score = score;
+    public EducationLevel getLevel() {
+        return level;
+    }
+    public String setStudentId(){
+        return studentId;
+    }
+    public EducationLevel setLevel(){
+        return level;
     }
 
-    // d) Cộng thêm điểm
-    public void addScore(float score) {
-        this.score += score;
+    private final String studentId;
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "level=" + level +
+                ", studentId='" + studentId + '\'' +
+                ", age=" + age +
+                ", hometown='" + hometown + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 
-    // e) In thông tin + xếp loại
-    public void printInfo() {
-        String rank;
+    private final EducationLevel level;
 
-        if (score < 4.0) {
-            rank = "Yếu";
-        } else if (score < 6.0) {
-            rank = "Trung bình";
-        } else if (score < 8.0) {
-            rank = "Khá";
-        } else {
-            rank = "Giỏi";
-        }
 
-        System.out.println("Tên: " + name);
-        System.out.println("Điểm học lực: " + score);
-        System.out.println("Xếp loại: " + rank);
+    public Student(String name, int age, String hometown,
+                   String studentId, EducationLevel level) {
+        super(name, age, hometown);
+        this.studentId = studentId;
+        this.level = level;
     }
+
 }

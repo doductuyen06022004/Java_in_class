@@ -1,9 +1,5 @@
 package com.vti.backend;
 
-
-
-public class Exercise2 {
-
-
+public class Exercise2Day6 {
 
 }

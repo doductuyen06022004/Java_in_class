@@ -9,5 +9,6 @@ public class Program3 {
         Exercise3 exercise3 = new Exercise3();
         System.out.println(exercise3);
         question1();
+
     }
 }
