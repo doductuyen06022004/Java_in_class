@@ -85,4 +85,28 @@ public class Exercise1 {
                 LocalDate.of(2024, 1, 1)
         );
     }
+
+    public static void main(String[] args) {
+        int [] number = {-1 , 1 ,3,5,-5,-8, -20 ,-18, -25};
+        int maxValue = getMaxValue (number);
+        int minValue = getMinvalue (number );
+        System.out.println("maxValue = " + maxValue);
+        System.out.println("minValue = " + minValue);
+    }
+    public static int getMaxValue (int[] number) {
+        int max = number[0];
+        for (int i = 1; i < number.length; i++) {// i=3
+            if (number[i] > max) {
+                max = number[i];
+            }
+        }return max;
+    }
+    public static int getMinvalue (int[] number) {
+        int min = number[0];
+        for (int i = 1; i < number.length ; ++i) {
+            if (number[i] < min) {
+                min = number[i];
+            }
+        }return min;
+    }
 }
