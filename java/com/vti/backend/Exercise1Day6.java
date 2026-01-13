@@ -4,7 +4,7 @@ import com.vti.entity.Student;
 
 
 import java.util.Objects;
-import java.util.Optional;
+
 import java.util.Scanner;
 
 import static com.vti.entity.Class.students;
@@ -37,28 +37,4 @@ public class Exercise1Day6 {
 
         }
         return userStringInput;
-    }
-    public static Optional<Student> getStudentById() {
-        Student student = new Student("", 0, "", "", null);
-        String idStudent = "";
-        do {
-            idStudent = getString(idStudent);
-        } while (Objects.isNull(idStudent));
-        for (int i = 0; i <= students.length - 1; i++) {
-            if (students[i] != null) {
-                if (students[i].getStudentId().equals(idStudent)) {
-                    student.setName(students[i].getName());
-                    student.setAge(students[i].getAge());
-                    student.setHometown(students[i].getHometown());
-                    student.setLevel();
-
-
-                }
-
-            } else {
-                break;
-            }
-            return Optional.of(students[i]);
-        } return Optional.of(student);
-    }
-}
+    }}

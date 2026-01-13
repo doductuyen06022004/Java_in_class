@@ -2,43 +2,71 @@ package com.vti.entity;
 
 
 
-public class Student extends Person {
 
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public EducationLevel getLevel() {
-        return level;
-    }
-    public String setStudentId(){
-        return studentId;
-    }
-    public EducationLevel setLevel(){
-        return level;
-    }
-
-    private final String studentId;
-
+public class Student  {
+    private final int id;
+    private final String name ;
+    private static int moneyGroup  ;
+    private static int count = 0;
     @Override
     public String toString() {
         return "Student{" +
-                "level=" + level +
-                ", studentId='" + studentId + '\'' +
-                ", age=" + age +
-                ", hometown='" + hometown + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
     }
 
-    private final EducationLevel level;
 
-
-    public Student(String name, int age, String hometown,
-                   String studentId, EducationLevel level) {
-        super(name, age, hometown);
-        this.studentId = studentId;
-        this.level = level;
+    public static int getMoneyGroup() {
+        return  moneyGroup;
     }
 
+    public static void setMoneyGroup(int moneyGroup) {
+        Student.moneyGroup = moneyGroup;
+
+    }
+
+
+    public static void pay_into_a_fund(int moneyGroup ) {
+        Student.moneyGroup += moneyGroup;
+
+        System.out.println(  " long quỹ " + moneyGroup + "k");
+    }
+    public static int  withdrawing(int moneyGroup ) {
+        Student.moneyGroup -= moneyGroup;
+        System.out.println(  " lấy " + moneyGroup + "k");
+        return moneyGroup;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Student(int id, String name ) {
+        this.id = id;
+        this.name = name;
+        count++;
+    }
+    public static int getCount() {
+        return count;
+    }
+    public static String getCollege() {
+        return college;
+    }
+
+    public static void setCollege(String college) {
+        Student.college = college;
+
+    }
+
+    private static String college;
+
+
+    public static String college() {
+
+        return college;
+    }
 }

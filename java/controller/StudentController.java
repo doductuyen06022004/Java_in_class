@@ -17,7 +17,7 @@ public class StudentController {
        System.out.println("Chọn từ danh sách sinh vien đã có");
 
       String idStudents = Exercise1Day6.getString("nhap id student");
-       idStudents = String.valueOf(Exercise1Day6.getStudentById());
+
        System.out.println(idStudents);
    }
 
