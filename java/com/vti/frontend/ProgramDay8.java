@@ -1,9 +1,6 @@
 package com.vti.frontend;
 
-import com.vti.backend.Ecercise1Day8;
-import com.vti.backend.MyMath;
-import com.vti.backend.PrimaryStudent;
-import com.vti.backend.SecondaryStudent;
+import com.vti.backend.*;
 import com.vti.entity.Student;
 import com.vti.entity.User;
 
@@ -38,5 +35,18 @@ public class ProgramDay8 {
         }
 
         user.showStudents();
+        MyMath.sum1(2);
+        System.out.println(MyMath.sum1(2));
+        try {
+            Geometry Circle1 = new Circle(6);
+            Geometry Circle2 = new Circle(4);
+            Geometry Circle3 = new Circle(2);
+            Geometry Circle4 = new Circle(8);
+            Geometry Rectangle = new Rectangle(5, 3);
+            Geometry Rectangle1 = new Rectangle(4, 9);
+        } catch (GeometryException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
