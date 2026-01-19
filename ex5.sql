@@ -1,91 +1,101 @@
-#1 Tạo view có chứa danh sách nhân viên thuộc phòng ban sale
-CREATE OR REPLACE VIEW vw_employee_sale AS
-SELECT 
-    a.AccountID,
-    a.FullName,
-    a.Email,
-    d.Department_Name
-FROM Account a
-JOIN Department d 
-    ON a.DepartmentID = d.DepartmentID
-WHERE d.Department_Name = 'Sale';
-#2 Tạo view có chứa thông tin các account tham gia vào nhiều group nhất
-CREATE OR REPLACE VIEW vw_account_most_groups AS
-SELECT 
-    a.AccountID,
-    a.FullName,
-    a.Email,
-    COUNT(ga.GroupID) AS total_groups
-FROM Account a
-JOIN groupaccount ga
-    ON a.AccountID = ga.AccountID
-GROUP BY a.AccountID, a.FullName, a.Email
-HAVING COUNT(ga.GroupID) = (
-    SELECT MAX(group_count)
-    FROM (
-        SELECT COUNT(GroupID) AS group_count
-        FROM GroupAccount
-        GROUP BY AccountID
-    ) AS t
-);
+DELIMITER $$
+CREATE PROCEDURE sp_get_department_name_by_id(
+    IN p_DepartmentID varchar 
+)
+BEGIN
+    SELECT Department_Name
+    FROM Department 
+    WHERE DepartmentID = p_DepartmentID;
+END $$
+DELIMITER ;
+CALL sp_get_department_name_by_id(2);
 
 
+#Viết procedure, them các account chưa có trong group nào vào 1 group được truyền vào từ input
+#Nếu tất cả account đã ở trong group thì thông báo message “Tất cả account đã đc tham gia vào group”
 
-#3 Tạo view có chứa câu hỏi có những content quá dài (content quá 300 từ
-# được coi là quá dài) và xóa nó đi 
-CREATE OR REPLACE VIEW vw_question_long_content AS
-SELECT 
-    QuestionID,
-    Content,
-      CHAR_LENGTH(Content) AS content_length
-FROM Question
-WHERE LENGTH(Content) > 300;
+# b1 dem so luong account
+# b2 dem so luong account da tham group vao group
+# b3 so sanh, neu 2 thang nay bang nhau thi throw message, neu khong bang nhau thi sang b4
+# b4 tim cac account chua co trong group sau do them vao group dc truyen vao tu input
 
-
-#4  Tạo view có chứa danh sách các phòng ban có nhiều nhân viên nhất
-CREATE OR REPLACE VIEW vw_department_most_employee AS
-SELECT 
-    d.DepartmentID,
-    d.Department_Name,
-    COUNT(a.AccountID) AS total_employee
-FROM department d
-LEFT JOIN Account a
-    ON d.DepartmentID = a.DepartmentID
-GROUP BY d.DepartmentID, d.Department_Name
-HAVING COUNT(a.AccountID) = (
-    SELECT MAX(emp_count)
-    FROM (
-        SELECT COUNT(a2.AccountID) AS emp_count
-        FROM Department d2
-        LEFT JOIN Account a2
-            ON d2.DepartmentID = a2.DepartmentID
-        GROUP BY d2.DepartmentID
-    ) AS t
-);
-
-#5 Tạo view có chứa tất các các câu hỏi do user họ Nguyễn tạo.
-CREATE OR REPLACE VIEW vw_question_creator_nguyen AS
-SELECT 
-    q.QuestionID,
-    q.Content,
-    q.CreateDate,
-    a.FullName AS CreatorName
-FROM Question q
-JOIN Account a
-    ON q.CreatorID = a.AccountID
-WHERE a.FullName LIKE 'Nguyễn%';
+drop procedure if exists add_account_to_group;
+delimiter $$
+create procedure add_account_to_group(in i_group_id int)
+    begin
+        #b1 dem so luong account
+        declare account_number int;
+        declare account_join_group int;
+        select count(accountid) into account_number from account;
+        #b2 dem so luong account tham gia vao group
+        select count(DISTINCT accountid) into account_join_group from group_account;
+        # b3
+        IF account_number = account_join_group THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Tất cả account đã tham gia vào group';
+        END IF;
+        #b4
+        insert into group_account(group_id, accountid, join_date)
+        select i_group_id, account.accountid , now()
+        from account
+        where account.accountid not in (
+            select accountid
+            from group_account
+        );
+    end $$
+delimiter ;
+call add_account_to_group(1);
 
 
-SELECT 
-    TABLE_NAME,
-    COLUMN_NAME,
-    CONSTRAINT_NAME
-FROM information_schema.KEY_COLUMN_USAGE
-WHERE REFERENCED_TABLE_NAME = 'account'
-  AND REFERENCED_COLUMN_NAME = 'Email'
-  AND TABLE_SCHEMA = 'testing_system';
-#drop FOREIGN KEY
-ALTER TABLE exam DROP FOREIGN KEY exam_ibfk_1;
-ALTER TABLE `group` DROP FOREIGN KEY group_ibfk_1;
-ALTER TABLE groupaccount DROP FOREIGN KEY groupaccount_ibfk_2;
-ALTER TABLE question DROP FOREIGN KEY question_ibfk_2;
+delimiter ; 
+
+DELIMITER $$
+Set global u
+CREATE FUNCTION fn_get_department_name(p_DepartmentID INT)
+RETURNS VARCHAR(50)
+DETERMINISTIC
+BEGIN
+    DECLARE deptName VARCHAR(50);
+
+    SELECT Department_Name
+    INTO deptName
+    FROM department
+    WHERE DepartmentID = p_DepartmentID;
+
+    RETURN deptName;
+END $$
+
+DELIMITER ;
+SELECT fn_get_department_name(54);
+
+
+DELIMITER $$
+
+USE `testing_system`$$
+
+CREATE FUNCTION max_acc_group ()
+RETURNS INTEGER
+BEGIN
+    declare max_ag int;
+
+    SELECT
+        account_id
+    INTO max_ag FROM
+        group_account ga
+    GROUP BY account_id
+    HAVING COUNT(group_id) = (
+        SELECT
+            MAX(num)
+        FROM
+            (SELECT
+                COUNT(group_id) num
+             FROM
+                group_account
+             GROUP BY account_id) t
+    );
+
+    RETURN max_ag;
+END$$
+
+DELIMITER ;
+select testing_system.max_acc_group();
+

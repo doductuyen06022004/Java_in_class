@@ -11,6 +11,15 @@ public class Student {
         this.id = ++autoId;
         this.name = name;
     }
+
+    public static String getCollege() {
+        return "College";
+    }
+
+    public static String getCount() {
+        return "Count";
+    }
+
     /**
      * @deprecated Use {@link #getIdWithPrefix()} instead.
      */

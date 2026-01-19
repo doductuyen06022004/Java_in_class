@@ -30,8 +30,8 @@ public class ProgramDay8 {
         User user = new User("admin");
 
         for (int i = 1; i <= 8; i++) {
-            Student student = new Student(1, "Student " + i);
-            user.addStudent(student);
+
+
         }
 
         user.showStudents();
