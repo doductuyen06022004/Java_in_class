@@ -1,4 +1,4 @@
-package controller;
+package validation;
 
 import com.vti.entity.Department;
 import com.vti.entity.Account;

@@ -41,4 +41,7 @@ public class Group {
             this.accounts[i] = acc;
         }
     }
+
+    public Group(int groupID, String groupName) {
+    }
 }
