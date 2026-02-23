@@ -2,7 +2,7 @@ package com.vti.frontend;
 
 import com.vti.backend.*;
 import com.vti.entity.Student;
-import com.vti.entity.User;
+
 
 public class ProgramDay8 {
     public static void main(String[] args) {
@@ -27,14 +27,14 @@ public class ProgramDay8 {
         System.out.println("Số PrimaryStudent được sinh ra: " + PrimaryStudent.getIdPrimaryStudent());
         System.out.println("Số SecondaryStudent được sinh ra: " + SecondaryStudent.getIdSecondaryStudent());
 
-        User user = new User("admin");
+
 
         for (int i = 1; i <= 8; i++) {
 
 
         }
 
-        user.showStudents();
+
         MyMath.sum1(2);
         System.out.println(MyMath.sum1(2));
         try {

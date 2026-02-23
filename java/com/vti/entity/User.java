@@ -1,32 +1,33 @@
 package com.vti.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
+    private int id;
     private String username;
-    private List<Student> students;
+    private String password;
 
-    private static final int MAX_STUDENT = 7;
+    public User() {}
 
-    public User(String username) {
+    public User(String username, String password) {
         this.username = username;
-        this.students = new ArrayList<>();
+        this.password = password;
     }
 
-    public void addStudent(Student student) {
-        if (students.size() >= MAX_STUDENT) {
-            System.out.println(" User chỉ được tạo tối đa 7 học sinh!");
-            return;
-        }
-        students.add(student);
-        System.out.println(" Đã thêm học sinh: " + student.getName());
+    public User(int id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
     }
 
-    public void showStudents() {
-        System.out.println("Danh sách học sinh của user " + username + ":");
-        for (Student s : students) {
-            System.out.println("- " + s.getName());
-        }
+    // getter & setter
+    public int getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

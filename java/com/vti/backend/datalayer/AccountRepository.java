@@ -35,6 +35,7 @@ public class AccountRepository implements IAccountRepository  {
         """;
 
         Connection conn = getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql);
         Statement statement = conn.createStatement();
         ResultSet rs = statement.executeQuery(sql);
 
